@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Vocab Reviser</title>
+    <title>English Vocabulary Learner</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -558,17 +558,17 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-book"></i> English Vocab Reviser</h1>
-            <p class="subtitle">Click the card to flip and use buttons to switch modes</p>
+            <h1><i class="fas fa-book"></i> English Vocabulary Learner</h1>
+            <p class="subtitle">Tap a card to reveal the answer and strengthen your English vocabulary.</p>
         </header>
 
         <div class="controls">
             <div class="mode-selector">
                 <button id="mode1" class="mode-btn active">
-                    <i class="fas fa-language"></i> 模式1：平假名 → 漢字+解釋
+                    <i class="fas fa-language"></i> Mode 1: Word → Meaning
                 </button>
                 <button id="mode2" class="mode-btn">
-                    <i class="fas fa-kanji"></i> 模式2：漢字 → 平假名+解釋
+                    <i class="fas fa-book-open"></i> Mode 2: Meaning → Word
                 </button>
             </div>
             
@@ -581,22 +581,22 @@
             
             <div class="buttons">
                 <button id="prevBtn" class="nav-btn">
-                    <i class="fas fa-arrow-left"></i> 上一個
+                    <i class="fas fa-arrow-left"></i> Previous
                 </button>
                 <button id="shuffleBtn" class="action-btn">
-                    <i class="fas fa-random"></i> 隨機排序
+                    <i class="fas fa-random"></i> Shuffle
                 </button>
                 <button id="nextBtn" class="nav-btn">
-                    下一個 <i class="fas fa-arrow-right"></i>
+                    Next <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
             
             <div class="action-buttons">
                 <button id="resetReviewBtn" class="action-btn action-btn-small">
-                    <i class="fas fa-undo"></i> 重設標記
+                    <i class="fas fa-undo"></i> Reset progress
                 </button>
                 <button id="manageBtn" class="action-btn action-btn-small">
-                    <i class="fas fa-cog"></i> 管理詞彙
+                    <i class="fas fa-cog"></i> Manage words
                 </button>
             </div>
         </div>
@@ -606,40 +606,40 @@
                 <div class="card-front">
                     <div class="card-content">
                         <div class="card-header">
-                            <span class="card-label" id="frontLabel">平假名</span>
-                            <span class="hint">點擊卡片查看答案</span>
+                            <span class="card-label" id="frontLabel">Word</span>
+                            <span class="hint">Tap the card to reveal the answer</span>
                         </div>
                         <div class="word-display">
-                            <h2 id="frontText">載入中...</h2>
+                            <h2 id="frontText">Loading...</h2>
                         </div>
                         <div class="card-footer">
-                            <i class="fas fa-hand-point-up"></i> 點擊卡片翻面
+                            <i class="fas fa-hand-point-up"></i> Tap to flip the card
                         </div>
                     </div>
                 </div>
                 <div class="card-back">
                     <div class="card-content">
                         <div class="card-header">
-                            <span class="card-label" id="backLabel">答案</span>
+                            <span class="card-label" id="backLabel">Answer</span>
                         </div>
                         <div class="answer-content">
                             <div class="kanji-section">
-                                <h3 id="backKanji">漢字</h3>
-                                <div class="reading" id="backReading">読み方</div>
+                                <h3 id="backKanji">Word</h3>
+                                <div class="reading" id="backReading">Meaning</div>
                             </div>
                             <div class="definition-section">
-                                <h4><i class="fas fa-book-open"></i> 解釋</h4>
-                                <p id="backDefinition">解釋內容</p>
+                                <h4><i class="fas fa-book-open"></i> Meaning</h4>
+                                <p id="backDefinition">Meaning will appear here</p>
                             </div>
                             <div class="example-section">
-                                <h4><i class="fas fa-comment"></i> 例句</h4>
-                                <p id="backExample">例句內容</p>
-                                <p class="translation" id="backTranslation">例句翻譯</p>
+                                <h4><i class="fas fa-comment"></i> Example sentence</h4>
+                                <p id="backExample">Example sentence will appear here</p>
+                                <p class="translation" id="backTranslation">Example translation will appear here</p>
                             </div>
                         </div>
-                        <div class="review-status" id="reviewStatus">尚未標記</div>
+                        <div class="review-status" id="reviewStatus">Not marked yet</div>
                         <div class="card-footer">
-                            <i class="fas fa-redo"></i> 點擊卡片返回
+                            <i class="fas fa-redo"></i> Tap the card to flip back
                         </div>
                     </div>
                 </div>
@@ -648,181 +648,179 @@
 
         <div class="review-panel">
             <div class="review-summary" id="reviewSummary">
-                <span class="summary-pill summary-pill-pending">未分類：<strong id="pendingCount">0</strong></span>
-                <span class="summary-pill summary-pill-know">我會了：<strong id="knownCount">0</strong></span>
-                <span class="summary-pill summary-pill-dontknow">我還不會：<strong id="dontKnowCount">0</strong></span>
+                <span class="summary-pill summary-pill-pending">New: <strong id="pendingCount">0</strong></span>
+                <span class="summary-pill summary-pill-know">Known: <strong id="knownCount">0</strong></span>
+                <span class="summary-pill summary-pill-dontknow">Needs review: <strong id="dontKnowCount">0</strong></span>
             </div>
             <div class="deck-filter-actions">
                 <button id="deckPendingBtn" class="deck-filter-btn active" type="button">
-                    未分類
+                    New
                 </button>
                 <button id="deckDontKnowBtn" class="deck-filter-btn" type="button">
-                    × 我還不會
+                    Needs review
                 </button>
                 <button id="deckKnownBtn" class="deck-filter-btn" type="button">
-                    <i class="fas fa-check"></i> 我會了
+                    <i class="fas fa-check"></i> Known
                 </button>
             </div>
             <div class="review-actions review-actions-outside">
                 <button id="knowBtn" class="review-btn review-btn-know" type="button">
-                    <i class="fas fa-check"></i> 我會了
+                    <i class="fas fa-check"></i> I know it
                 </button>
                 <button id="dontKnowBtn" class="review-btn review-btn-dontknow" type="button">
-                    <i class="fas fa-times"></i> 我還不會
+                    <i class="fas fa-times"></i> Need more practice
                 </button>
             </div>
         </div>
 
         <div class="management-panel" id="managementPanel">
             <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="single">添加單個詞彙</button>
-                <button class="tab-btn" data-tab="bulk">批量導入詞彙</button>
-                <button class="tab-btn" data-tab="edit">編輯/刪除詞彙</button>
-                <button class="tab-btn" data-tab="manage">管理設置</button>
+                <button class="tab-btn active" data-tab="single">Add a word</button>
+                <button class="tab-btn" data-tab="bulk">Import words</button>
+                <button class="tab-btn" data-tab="edit">Edit or delete words</button>
+                <button class="tab-btn" data-tab="manage">Manage settings</button>
             </div>
             
             <div class="tab-content active" id="singleTab">
-                <h3><i class="fas fa-plus-circle"></i> 添加新的單字</h3>
+                <h3><i class="fas fa-plus-circle"></i> Add a new word</h3>
                 <div class="form-group">
-                    <label for="hiraganaInput">平假名（必填）</label>
-                    <input type="text" id="hiraganaInput" class="form-control" placeholder="例：みちにまよう">
+                    <label for="hiraganaInput">English word (required)</label>
+                    <input type="text" id="hiraganaInput" class="form-control" placeholder="Example: diligent">
                 </div>
                 <div class="form-group">
-                    <label for="kanjiInput">漢字（可選）</label>
-                    <input type="text" id="kanjiInput" class="form-control" placeholder="例：道に迷う">
+                    <label for="kanjiInput">Translation or note (optional)</label>
+                    <input type="text" id="kanjiInput" class="form-control" placeholder="Example: hardworking">
                 </div>
                 <div class="form-group">
-                    <label for="definitionInput">解釋（必填）</label>
-                    <input type="text" id="definitionInput" class="form-control" placeholder="例：迷路">
+                    <label for="definitionInput">Meaning (required)</label>
+                    <input type="text" id="definitionInput" class="form-control" placeholder="Example: showing care and effort in your work">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInput">例句（可選）</label>
-                    <textarea id="exampleInput" class="form-control" rows="2" placeholder="例：山の中で道に迷うのは危険だ。"></textarea>
+                    <label for="exampleInput">Example sentence (optional)</label>
+                    <textarea id="exampleInput" class="form-control" rows="2" placeholder="Example: She is a diligent student who always finishes her homework."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="translationInput">例句翻譯（可選）</label>
-                    <textarea id="translationInput" class="form-control" rows="2" placeholder="例：在山裡迷路很危險。"></textarea>
+                    <label for="translationInput">Example translation (optional)</label>
+                    <textarea id="translationInput" class="form-control" rows="2" placeholder="Example: 她是一个勤奋的学生，总是按时完成作业。"></textarea>
                 </div>
                 <div class="btn-group">
                     <button id="addVocabBtn" class="btn-primary">
-                        <i class="fas fa-save"></i> 保存詞彙
+                        <i class="fas fa-save"></i> Save word
                     </button>
                     <button id="clearFormBtn" class="btn-secondary">
-                        <i class="fas fa-eraser"></i> 清空表單
+                        <i class="fas fa-eraser"></i> Clear form
                     </button>
                 </div>
             </div>
             
             <div class="tab-content" id="bulkTab">
-                <h3><i class="fas fa-file-import"></i> 批量導入詞彙</h3>
-                <p>請按照以下格式輸入（每行一個詞彙，用 "|" 分隔）：</p>
+                <h3><i class="fas fa-file-import"></i> Import words in bulk</h3>
+                <p>Enter your words in this format, one per line, separated by "|":</p>
                 <div class="format-guide">
-                    <p><strong>格式：</strong> 平假名|漢字|解釋|例句|例句翻譯</p>
-                    <p><strong>範例：</strong></p>
-                    <code>せいかくがあかるい|性格が明るい|性格開朗|彼女は性格が明るくて、誰からも好かれる。|她性格開朗，受到大家的喜愛。</code><br>
-                    <code>ポイント|ポイント|要點、重點|彼の話はポイントがはっきりしていて分かりやすい。|他的話重點明確，容易理解。</code>
-                    <p class="small">注意：漢字、例句、例句翻譯可以留空，但平假名和解釋必須填寫</p>
+                    <p><strong>Format:</strong> word|meaning|example sentence|example translation</p>
+                    <p><strong>Example:</strong></p>
+                    <code>curious|eager to learn or know something|She is curious about how the machine works.|她对机器是如何工作的很好奇。</code><br>
+                    <code>confident|feeling sure about your abilities|He spoke confidently in the interview.|他在面试中自信地说话。</code>
+                    <p class="small">Note: The word and meaning are required. The example sentence and translation can be left blank.</p>
                 </div>
                 <div class="form-group">
-                    <label for="bulkInput">批量輸入</label>
-                    <textarea id="bulkInput" class="form-control textarea-control" placeholder="在這裡貼上你的詞彙數據..."></textarea>
+                    <label for="bulkInput">Bulk input</label>
+                    <textarea id="bulkInput" class="form-control textarea-control" placeholder="Paste your vocabulary data here..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>預覽（顯示前3個詞彙）：</label>
+                    <label>Preview (first 3 entries):</label>
                     <div id="bulkPreview" class="format-guide">
-                        請輸入數據以查看預覽...
+                        Enter some data to preview it...
                     </div>
                 </div>
                 <div class="btn-group">
                     <button id="importBulkBtn" class="btn-success">
-                        <i class="fas fa-file-import"></i> 導入詞彙
+                        <i class="fas fa-file-import"></i> Import words
                     </button>
                     <button id="clearBulkBtn" class="btn-secondary">
-                        <i class="fas fa-eraser"></i> 清空輸入
+                        <i class="fas fa-eraser"></i> Clear input
                     </button>
                 </div>
             </div>
             
             <div class="tab-content" id="editTab">
-                <h3><i class="fas fa-edit"></i> 編輯/刪除詞彙</h3>
+                <h3><i class="fas fa-edit"></i> Edit or delete words</h3>
                 <div class="search-box">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="searchVocab" class="form-control search-input" placeholder="搜尋詞彙...">
+                    <input type="text" id="searchVocab" class="form-control search-input" placeholder="Search words...">
                 </div>
                 
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">全部詞彙</button>
-                    <button class="filter-btn" data-filter="custom">自定義詞彙</button>
-                    <button class="filter-btn" data-filter="original">原始詞彙</button>
+                    <button class="filter-btn active" data-filter="all">All words</button>
+                    <button class="filter-btn" data-filter="custom">Custom words</button>
+                    <button class="filter-btn" data-filter="original">Built-in words</button>
                 </div>
                 
                 <div id="vocabList" class="vocab-list">
-                    <!-- 詞彙列表會在這裡動態生成 -->
                     <div class="no-vocab-message">
-                        <p>正在載入詞彙...</p>
+                        <p>Loading words...</p>
                     </div>
                 </div>
                 
                 <div class="pagination" id="pagination">
-                    <!-- 分頁按鈕會在這裡動態生成 -->
                 </div>
             </div>
             
             <div class="tab-content" id="manageTab">
-                <h3><i class="fas fa-list"></i> 管理設置</h3>
+                <h3><i class="fas fa-list"></i> Manage settings</h3>
                 <div class="data-stats">
                     <div class="stat-item">
                         <div class="stat-value" id="totalCount">0</div>
-                        <div class="stat-label">總詞彙數</div>
+                        <div class="stat-label">Total words</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="originalCount">0</div>
-                        <div class="stat-label">原始詞彙</div>
+                        <div class="stat-label">Built-in words</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="customCount">0</div>
-                        <div class="stat-label">自定義詞彙</div>
+                        <div class="stat-label">Custom words</div>
                     </div>
                 </div>
                 <div class="btn-group">
                     <button id="resetCustomBtn" class="btn-warning">
-                        <i class="fas fa-trash"></i> 刪除所有自定義詞彙
+                        <i class="fas fa-trash"></i> Delete all custom words
                     </button>
                     <button id="resetAllBtn" class="btn-danger">
-                        <i class="fas fa-redo"></i> 重置為原始數據
+                        <i class="fas fa-redo"></i> Reset to built-in data
                     </button>
                 </div>
                 <div class="format-guide">
-                    <p><i class="fas fa-info-circle"></i> 注意事項：</p>
+                    <p><i class="fas fa-info-circle"></i> Notes:</p>
                     <ul>
-                        <li>自定義詞彙會保存在你的瀏覽器中，不會影響其他人</li>
-                        <li>原始詞彙無法編輯或刪除</li>
-                        <li>重置操作無法恢復，請謹慎操作</li>
+                        <li>Custom words are stored in your browser and will not affect other users.</li>
+                        <li>Built-in words cannot be edited or deleted.</li>
+                        <li>Reset actions cannot be undone, so use them carefully.</li>
                     </ul>
                 </div>
 
                 <div class="cloud-sync-panel">
-                    <h4><i class="fas fa-magic"></i> 快速同步（新手推薦）</h4>
+                    <h4><i class="fas fa-magic"></i> Quick sync (recommended)</h4>
                     <div class="btn-group">
                         <button id="downloadEasySyncBtn" class="btn-success">
-                            <i class="fas fa-file-export"></i> 下載同步檔
+                            <i class="fas fa-file-export"></i> Download sync file
                         </button>
                         <button id="importEasySyncBtn" class="btn-primary">
-                            <i class="fas fa-file-import"></i> 匯入同步檔
+                            <i class="fas fa-file-import"></i> Import sync file
                         </button>
                     </div>
                     <input type="file" id="easySyncFileInput" accept="application/json" style="display:none;">
                     <div class="cloud-sync-note">
-                        最簡單流程：A 裝置先按「下載同步檔」→ 把檔案傳到 B 裝置（例如 OneDrive/Email）→ B 裝置按「匯入同步檔」。
+                        The easiest flow: create a sync file on Device A, transfer it to Device B (for example via OneDrive or email), and import it on Device B.
                     </div>
-                    <div id="easySyncStatus" class="cloud-sync-status">尚未進行快速同步</div>
+                    <div id="easySyncStatus" class="cloud-sync-status">No quick sync has been performed yet</div>
                 </div>
 
                 <div class="cloud-sync-panel">
-                    <h4><i class="fab fa-github"></i> 進階同步（GitHub Token）</h4>
+                    <h4><i class="fab fa-github"></i> Advanced sync (GitHub token)</h4>
                     <div class="cloud-sync-grid">
                         <div class="form-group">
-                            <label for="githubSyncOwner">GitHub Owner</label>
+                            <label for="githubSyncOwner">GitHub owner</label>
                             <input type="text" id="githubSyncOwner" class="form-control" value="jerryleung16">
                         </div>
                         <div class="form-group">
@@ -834,74 +832,74 @@
                             <input type="text" id="githubSyncBranch" class="form-control" value="main">
                         </div>
                         <div class="form-group">
-                            <label for="githubSyncPath">Sync File Path</label>
+                            <label for="githubSyncPath">Sync file path</label>
                             <input type="text" id="githubSyncPath" class="form-control" value="shared/english-vocab-sync.json">
                         </div>
                         <div class="form-group full-width">
-                            <label for="githubSyncToken">GitHub Personal Access Token（需要 Contents: Read and write）</label>
+                            <label for="githubSyncToken">GitHub personal access token (requires contents: read and write)</label>
                             <input type="password" id="githubSyncToken" class="form-control" placeholder="ghp_xxx...">
                         </div>
                     </div>
                     <div class="btn-group">
                         <button id="saveCloudConfigBtn" class="btn-secondary">
-                            <i class="fas fa-save"></i> 儲存雲端設定
+                            <i class="fas fa-save"></i> Save cloud settings
                         </button>
                         <button id="uploadCloudBtn" class="btn-success">
-                            <i class="fas fa-upload"></i> 上傳到雲端
+                            <i class="fas fa-upload"></i> Upload to cloud
                         </button>
                         <button id="downloadCloudBtn" class="btn-primary">
-                            <i class="fas fa-download"></i> 從雲端下載
+                            <i class="fas fa-download"></i> Download from cloud
                         </button>
                     </div>
                     <div class="cloud-sync-note">
-                        會同步：自定義詞彙 + 我會了/我還不會標記。為了安全，Token 僅存於你目前瀏覽器的本地儲存。
+                        This syncs custom words and your I know it / need more practice progress. For safety, the token is stored only in your current browser.
                     </div>
-                    <div id="cloudSyncStatus" class="cloud-sync-status">尚未同步</div>
+                    <div id="cloudSyncStatus" class="cloud-sync-status">Not synced yet</div>
                 </div>
             </div>
         </div>
 
         <!-- 編輯詞彙表單（隱藏，用於編輯時彈出） -->
         <div class="edit-form" id="editForm">
-            <h3><i class="fas fa-edit"></i> 編輯詞彙</h3>
+            <h3><i class="fas fa-edit"></i> Edit word</h3>
             <div class="form-group">
-                <label for="editHiragana">平假名（必填）</label>
+                <label for="editHiragana">English word (required)</label>
                 <input type="text" id="editHiragana" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editKanji">漢字（可選）</label>
+                <label for="editKanji">Translation or note (optional)</label>
                 <input type="text" id="editKanji" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editDefinition">解釋（必填）</label>
+                <label for="editDefinition">Meaning (required)</label>
                 <input type="text" id="editDefinition" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editExample">例句（可選）</label>
+                <label for="editExample">Example sentence (optional)</label>
                 <textarea id="editExample" class="form-control" rows="2"></textarea>
             </div>
             <div class="form-group">
-                <label for="editTranslation">例句翻譯（可選）</label>
+                <label for="editTranslation">Example translation (optional)</label>
                 <textarea id="editTranslation" class="form-control" rows="2"></textarea>
             </div>
             <div class="btn-group">
                 <button id="saveEditBtn" class="btn-primary">
-                    <i class="fas fa-save"></i> 保存修改
+                    <i class="fas fa-save"></i> Save changes
                 </button>
                 <button id="cancelEditBtn" class="btn-secondary">
-                    <i class="fas fa-times"></i> 取消編輯
+                    <i class="fas fa-times"></i> Cancel
                 </button>
             </div>
         </div>
 
         <div class="instructions">
-            <h3><i class="fas fa-info-circle"></i> 使用說明</h3>
+            <h3><i class="fas fa-info-circle"></i> How it works</h3>
             <ul>
-                <li><strong>模式1</strong>：正面顯示平假名，背面顯示漢字、解釋和例句</li>
-                <li><strong>模式2</strong>：正面顯示漢字，背面顯示平假名、解釋和例句</li>
-                <li><strong>操作</strong>：點擊卡片翻面，使用按鈕切換單字</li>
-                <li><strong>管理功能</strong>：點擊「管理詞彙」可以添加、編輯、刪除詞彙</li>
-                <li><strong>數據保存</strong>：所有自定義詞彙會自動保存在你的瀏覽器中</li>
+                <li><strong>Mode 1</strong>: the front shows the word, and the back shows the meaning and example sentence.</li>
+                <li><strong>Mode 2</strong>: the front shows the meaning, and the back shows the word and example sentence.</li>
+                <li><strong>Study flow</strong>: tap the card to reveal the answer, then use the buttons to mark words you know or want to review.</li>
+                <li><strong>Manage words</strong>: open Manage words to add, edit, or delete your own vocabulary entries.</li>
+                <li><strong>Data saving</strong>: your custom words are saved automatically in your browser.</li>
             </ul>
         </div>
     </div>
@@ -909,18 +907,18 @@
     <!-- 確認對話框 -->
     <div class="confirmation-dialog" id="confirmDialog">
         <div class="dialog-content">
-            <h3 id="dialogTitle">確認操作</h3>
-            <p id="dialogMessage">你確定要執行這個操作嗎？</p>
+            <h3 id="dialogTitle">Confirm action</h3>
+            <p id="dialogMessage">Are you sure you want to perform this action?</p>
             <div class="btn-group">
-                <button id="dialogConfirmBtn" class="btn-primary">確定</button>
-                <button id="dialogCancelBtn" class="btn-secondary">取消</button>
+                <button id="dialogConfirmBtn" class="btn-primary">Confirm</button>
+                <button id="dialogCancelBtn" class="btn-secondary">Cancel</button>
             </div>
         </div>
     </div>
 
     <!-- 通知訊息 -->
     <div class="notification" id="notification">
-        <span id="notificationMessage">操作成功！</span>
+        <span id="notificationMessage">Success!</span>
     </div>
 
     <script src="vocab-data.js"></script>
@@ -1071,7 +1069,7 @@
                 
                 // 驗證輸入
                 if (!hiragana || !definition) {
-                    showNotification('請至少填寫平假名和解釋！', 'error');
+                    showNotification('Please enter both the word and its meaning.', 'error');
                     return;
                 }
                 
@@ -1094,7 +1092,7 @@
                     }
                     
                     // 顯示成功訊息
-                    showNotification(`已添加詞彙：${kanji || hiragana}`);
+                    showNotification(`Added word: ${kanji || hiragana}`);
                     
                     // 更新統計數據
                     updateStats();
@@ -1121,7 +1119,7 @@
             importBulkBtn.addEventListener('click', function() {
                 const bulkText = bulkInput.value.trim();
                 if (!bulkText) {
-                    showNotification('請輸入要導入的詞彙數據！', 'error');
+                    showNotification('Please enter the vocabulary data to import.', 'error');
                     return;
                 }
                 
@@ -1134,14 +1132,14 @@
                     
                     // 驗證格式
                     if (parts.length < 3) {
-                        errors.push(`第 ${index + 1} 行：格式不正確（需要至少3個欄位）`);
+                        errors.push(`Line ${index + 1}: format is invalid (at least 3 fields are required)`);
                         return;
                     }
                     
                     const [hiragana, kanji, definition, example, translation] = parts;
                     
                     if (!hiragana || !definition) {
-                        errors.push(`第 ${index + 1} 行：平假名和解釋不能為空`);
+                        errors.push(`Line ${index + 1}: the word and meaning cannot be empty`);
                         return;
                     }
                     
@@ -1155,12 +1153,12 @@
                 });
                 
                 if (errors.length > 0) {
-                    showNotification(`導入失敗：\n${errors.slice(0, 3).join('\n')}${errors.length > 3 ? '\n...' : ''}`, 'error');
+                    showNotification(`Import failed:\n${errors.slice(0, 3).join('\n')}${errors.length > 3 ? '\n...' : ''}`, 'error');
                     return;
                 }
                 
                 if (importedVocab.length === 0) {
-                    showNotification('沒有找到有效的詞彙數據！', 'error');
+                    showNotification('No valid vocabulary data was found.', 'error');
                     return;
                 }
                 
@@ -1179,7 +1177,7 @@
                 }
                 
                 // 顯示成功訊息
-                showNotification(`成功導入 ${importedVocab.length} 個詞彙！`);
+                showNotification(`Successfully imported ${importedVocab.length} words!`);
                 
                 // 更新統計數據
                 updateStats();
@@ -1193,16 +1191,16 @@
             // 刪除自定義詞彙
             resetCustomBtn.addEventListener('click', function() {
                 currentAction = 'resetCustom';
-                dialogTitle.textContent = '刪除自定義詞彙';
-                dialogMessage.textContent = '你確定要刪除所有自定義詞彙嗎？這個操作無法撤銷。';
+                dialogTitle.textContent = 'Delete custom words';
+                dialogMessage.textContent = 'Are you sure you want to delete all custom words? This cannot be undone.';
                 confirmDialog.classList.add('active');
             });
             
             // 重置所有詞彙
             resetAllBtn.addEventListener('click', function() {
                 currentAction = 'resetAll';
-                dialogTitle.textContent = '重置為原始數據';
-                dialogMessage.textContent = '你確定要重置所有詞彙嗎？所有自定義詞彙將會被刪除。';
+                dialogTitle.textContent = 'Reset to built-in data';
+                dialogMessage.textContent = 'Are you sure you want to reset all words? All custom words will be removed.';
                 confirmDialog.classList.add('active');
             });
             
@@ -1212,13 +1210,13 @@
                     // 刪除自定義詞彙
                     if (window.resetCustomVocab) {
                         window.resetCustomVocab();
-                        showNotification('已刪除所有自定義詞彙');
+                        showNotification('All custom words have been deleted');
                     }
                 } else if (currentAction === 'resetAll') {
                     // 重置所有詞彙
                     if (window.resetAllVocab) {
                         window.resetAllVocab();
-                        showNotification('已重置所有詞彙');
+                        showNotification('All words have been reset');
                     }
                 }
                 
@@ -1281,12 +1279,12 @@
                 
                 // 驗證輸入
                 if (!hiragana || !definition) {
-                    showNotification('請至少填寫平假名和解釋！', 'error');
+                    showNotification('Please enter both the word and its meaning.', 'error');
                     return;
                 }
                 
                 if (!currentEditingId) {
-                    showNotification('編輯錯誤：找不到詞彙ID', 'error');
+                    showNotification('Edit error: word ID not found', 'error');
                     return;
                 }
                 
@@ -1310,7 +1308,7 @@
                     }
                     
                     // 顯示成功訊息
-                    showNotification('詞彙修改成功！');
+                    showNotification('Word updated successfully!');
                     
                     // 重新載入詞彙列表
                     loadVocabList();
@@ -1326,7 +1324,7 @@
             function updateBulkPreview() {
                 const text = bulkInput.value.trim();
                 if (!text) {
-                    bulkPreview.innerHTML = '請輸入數據以查看預覽...';
+                    bulkPreview.innerHTML = 'Enter data to preview it...';
                     return;
                 }
                 
@@ -1338,13 +1336,13 @@
                     if (parts.length >= 3) {
                         previewHTML += `<div class="preview-item"><strong>${index + 1}.</strong> ${parts[0]} → ${parts[1] || parts[0]}</div>`;
                     } else {
-                        previewHTML += `<div class="preview-item error"><strong>${index + 1}.</strong> 格式錯誤（需要至少3個欄位）</div>`;
+                        previewHTML += `<div class="preview-item error"><strong>${index + 1}.</strong> Invalid format (at least 3 fields are required)</div>`;
                     }
                 });
                 
                 const totalLines = text.split('\n').filter(line => line.trim() !== '').length;
                 if (totalLines > 3) {
-                    previewHTML += `<div class="preview-item">... 還有 ${totalLines - 3} 個詞彙</div>`;
+                    previewHTML += `<div class="preview-item">... ${totalLines - 3} more words</div>`;
                 }
                 
                 bulkPreview.innerHTML = previewHTML;
@@ -1388,8 +1386,8 @@
                     const message = document.createElement('div');
                     message.className = 'no-vocab-message';
                     message.innerHTML = currentSearch ? 
-                        `<p>找不到符合 "${currentSearch}" 的詞彙</p>` :
-                        `<p>沒有詞彙數據，請添加詞彙</p>`;
+                        `<p>No words match "${currentSearch}"</p>` :
+                        `<p>No words available yet. Add a word to get started.</p>`;
                     vocabList.appendChild(message);
                     
                     // 清空分頁
@@ -1415,7 +1413,7 @@
                 
                 const isCustom = vocab.id >= 1000;
                 const badgeType = isCustom ? 'badge-custom' : 'badge-original';
-                const badgeText = isCustom ? '自定義' : '原始';
+                const badgeText = isCustom ? 'Custom' : 'Built-in';
                 
                 item.innerHTML = `
                     <div class="vocab-content">
@@ -1428,17 +1426,17 @@
                     </div>
                     <div class="vocab-actions">
                         ${isCustom ? `
-                            <button class="action-btn-icon edit-btn" title="編輯">
+                            <button class="action-btn-icon edit-btn" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="action-btn-icon delete-btn" title="刪除">
+                            <button class="action-btn-icon delete-btn" title="Delete">
                                 <i class="fas fa-trash"></i>
                             </button>
                         ` : `
-                            <button class="action-btn-icon edit-btn" title="原始詞彙無法編輯" disabled>
+                            <button class="action-btn-icon edit-btn" title="Built-in words cannot be edited" disabled>
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="action-btn-icon delete-btn" title="原始詞彙無法刪除" disabled>
+                            <button class="action-btn-icon delete-btn" title="Built-in words cannot be deleted" disabled>
                                 <i class="fas fa-trash"></i>
                             </button>
                         `}
@@ -1485,8 +1483,8 @@
                 currentAction = 'deleteSingle';
                 currentEditingId = vocab.id;
                 
-                dialogTitle.textContent = '刪除詞彙';
-                dialogMessage.textContent = `你確定要刪除詞彙「${vocab.kanji || vocab.hiragana}」嗎？這個操作無法撤銷。`;
+                dialogTitle.textContent = 'Delete word';
+                dialogMessage.textContent = `Are you sure you want to delete the word "${vocab.kanji || vocab.hiragana}"? This cannot be undone.`;
                 confirmDialog.classList.add('active');
             }
             
@@ -1579,7 +1577,7 @@
                 try {
                     const payload = window.exportSyncPayload ? window.exportSyncPayload() : null;
                     if (!payload) {
-                        throw new Error('無法取得同步資料');
+                        throw new Error('Unable to retrieve sync data');
                     }
 
                     const text = JSON.stringify(payload, null, 2);
@@ -1594,12 +1592,12 @@
                     URL.revokeObjectURL(url);
 
                     const now = new Date().toLocaleString();
-                    setEasySyncStatus(`已下載同步檔：${now}`, 'success');
-                    showNotification('同步檔下載完成！');
+                    setEasySyncStatus(`Downloaded sync file: ${now}`, 'success');
+                    showNotification('Sync file downloaded successfully!');
                 } catch (error) {
                     console.error(error);
-                    setEasySyncStatus(`下載失敗：${error.message}`, 'error');
-                    showNotification('下載同步檔失敗', 'error');
+                    setEasySyncStatus(`Download failed: ${error.message}`, 'error');
+                    showNotification('Failed to download sync file', 'error');
                 }
             }
 
@@ -1609,10 +1607,10 @@
                 try {
                     const text = await file.text();
                     const payload = JSON.parse(text);
-                    const result = window.importSyncPayload ? window.importSyncPayload(payload, { overwrite: true }) : { success: false, message: '匯入功能不可用' };
+                    const result = window.importSyncPayload ? window.importSyncPayload(payload, { overwrite: true }) : { success: false, message: 'Import is not available' };
 
                     if (!result.success) {
-                        throw new Error(result.message || '匯入失敗');
+                        throw new Error(result.message || 'Import failed');
                     }
 
                     if (window.updateCard) {
@@ -1624,12 +1622,12 @@
                     }
 
                     const now = new Date().toLocaleString();
-                    setEasySyncStatus(`匯入成功：${now}`, 'success');
-                    showNotification('同步檔匯入成功！');
+                    setEasySyncStatus(`Import successful: ${now}`, 'success');
+                    showNotification('Sync file imported successfully!');
                 } catch (error) {
                     console.error(error);
-                    setEasySyncStatus(`匯入失敗：${error.message}`, 'error');
-                    showNotification('同步檔匯入失敗，請確認檔案格式', 'error');
+                    setEasySyncStatus(`Import failed: ${error.message}`, 'error');
+                    showNotification('Sync file import failed. Please check the file format.', 'error');
                 } finally {
                     easySyncFileInput.value = '';
                 }
@@ -1661,10 +1659,10 @@
                     githubSyncToken.value = config.token || '';
 
                     if (config.lastSyncAt) {
-                        setCloudSyncStatus(`上次同步：${new Date(config.lastSyncAt).toLocaleString()}`);
+                        setCloudSyncStatus(`Last sync: ${new Date(config.lastSyncAt).toLocaleString()}`);
                     }
                 } catch (error) {
-                    console.error('載入雲端設定失敗:', error);
+                    console.error('Failed to load cloud settings:', error);
                 }
             }
 
@@ -1690,16 +1688,16 @@
                 return new TextDecoder().decode(bytes);
             }
 
-            function getReadableGithubErrorText(status, bodyText, action = '操作') {
+            function getReadableGithubErrorText(status, bodyText, action = 'Action') {
                 if (status === 401) {
-                    return `${action}失敗：GitHub Token 無效或已過期（401 Bad credentials）。請重新產生 Token，並確認貼上時沒有多餘空白。`;
+                    return `${action} failed: GitHub token is invalid or expired (401 Bad credentials). Please generate a new token and make sure it does not contain extra whitespace.`;
                 }
 
                 if (status === 403) {
-                    return `${action}失敗：權限不足（403）。請確認 Token 有 repository 內容權限。`;
+                    return `${action} failed: permission denied (403). Please confirm that the token has repository contents access.`;
                 }
 
-                return `${action}失敗 (${status}): ${bodyText}`;
+                return `${action} failed (${status}): ${bodyText}`;
             }
 
             async function fetchCloudFile(config, options = {}) {
@@ -1723,7 +1721,7 @@
 
                 if (!response.ok) {
                     const text = await response.text();
-                    throw new Error(getReadableGithubErrorText(response.status, text, '讀取雲端文件'));
+                    throw new Error(getReadableGithubErrorText(response.status, text, 'Read cloud file'));
                 }
 
                 return response.json();
@@ -1732,12 +1730,12 @@
             async function uploadCloudSync() {
                 const config = getCloudSyncConfigFromInputs();
                 if (!config.owner || !config.repo || !config.path || !config.token) {
-                    showNotification('請完整填寫雲端同步設定與 Token', 'error');
-                    setCloudSyncStatus('上傳失敗：設定不完整', 'error');
+                    showNotification('Please complete the cloud sync settings and token', 'error');
+                    setCloudSyncStatus('Upload failed: settings are incomplete', 'error');
                     return;
                 }
 
-                setCloudSyncStatus('正在上傳到雲端...');
+setCloudSyncStatus('Uploading to the cloud...');
 
                 try {
                     const payload = window.exportSyncPayload ? window.exportSyncPayload() : null;
@@ -1771,29 +1769,29 @@
 
                     if (!updateResp.ok) {
                         const text = await updateResp.text();
-                        throw new Error(getReadableGithubErrorText(updateResp.status, text, '上傳'));
+                        throw new Error(getReadableGithubErrorText(updateResp.status, text, 'Upload'));
                     }
 
                     const now = new Date().toISOString();
                     saveCloudSyncConfig(now);
-                    setCloudSyncStatus(`上傳成功：${new Date(now).toLocaleString()}`, 'success');
-                    showNotification('雲端同步上傳成功！');
+                    setCloudSyncStatus(`Upload successful: ${new Date(now).toLocaleString()}`, 'success');
+                    showNotification('Cloud sync upload completed successfully!');
                 } catch (error) {
                     console.error(error);
-                    setCloudSyncStatus(`上傳失敗：${error.message}`, 'error');
-                    showNotification('雲端上傳失敗，請檢查設定或 Token 權限', 'error');
+                    setCloudSyncStatus(`Upload failed: ${error.message}`, 'error');
+                    showNotification('Cloud upload failed. Please check your settings or token permissions.', 'error');
                 }
             }
 
             async function downloadCloudSync() {
                 const config = getCloudSyncConfigFromInputs();
                 if (!config.owner || !config.repo || !config.path) {
-                    showNotification('請完整填寫雲端同步設定', 'error');
-                    setCloudSyncStatus('下載失敗：設定不完整', 'error');
+                    showNotification('Please complete the cloud sync settings', 'error');
+                    setCloudSyncStatus('Download failed: settings are incomplete', 'error');
                     return;
                 }
 
-                setCloudSyncStatus('正在從雲端下載...');
+                setCloudSyncStatus('Downloading from the cloud...');
 
                 try {
                     let cloudFile = null;
@@ -1803,9 +1801,9 @@
                             cloudFile = await fetchCloudFile(config, { useAuth: true });
                         } catch (error) {
                             if (error.message.includes('401') || error.message.includes('Bad credentials')) {
-                                // Token 錯誤時，公開 repo 仍嘗試匿名讀取
+                                // If the token is invalid, the app still tries an anonymous public read.
                                 cloudFile = await fetchCloudFile(config, { useAuth: false });
-                                showNotification('Token 驗證失敗，已改用公開讀取模式下載。', 'warning');
+                                showNotification('Token validation failed. The app switched to public read mode for the download.', 'warning');
                             } else {
                                 throw error;
                             }
@@ -1815,15 +1813,15 @@
                     }
 
                     if (!cloudFile || !cloudFile.content) {
-                        throw new Error('找不到雲端同步文件，請先上傳一次');
+                        throw new Error('Cloud sync file not found. Please upload one first.');
                     }
 
                     const jsonText = decodeBase64Utf8(cloudFile.content.replace(/\n/g, ''));
                     const payload = JSON.parse(jsonText);
-                    const result = window.importSyncPayload ? window.importSyncPayload(payload, { overwrite: true }) : { success: false, message: '匯入功能不可用' };
+                    const result = window.importSyncPayload ? window.importSyncPayload(payload, { overwrite: true }) : { success: false, message: 'Import is not available' };
 
                     if (!result.success) {
-                        throw new Error(result.message || '匯入失敗');
+                        throw new Error(result.message || 'Import failed');
                     }
 
                     const now = new Date().toISOString();
@@ -1837,12 +1835,12 @@
                         loadVocabList();
                     }
 
-                    setCloudSyncStatus(`下載成功：${new Date(now).toLocaleString()}`, 'success');
-                    showNotification('已從雲端同步詞彙與標記！');
+                    setCloudSyncStatus(`Download successful: ${new Date(now).toLocaleString()}`, 'success');
+                    showNotification('Vocabulary and progress synced from the cloud!');
                 } catch (error) {
                     console.error(error);
-                    setCloudSyncStatus(`下載失敗：${error.message}`, 'error');
-                    showNotification('雲端下載失敗，請檢查設定或改用快速同步。', 'error');
+                    setCloudSyncStatus(`Download failed: ${error.message}`, 'error');
+                    showNotification('Cloud download failed. Please check your settings or try quick sync instead.', 'error');
                 }
             }
             
@@ -1895,8 +1893,8 @@
 
             saveCloudConfigBtn.addEventListener('click', function() {
                 saveCloudSyncConfig();
-                setCloudSyncStatus('雲端設定已儲存', 'success');
-                showNotification('雲端設定已儲存');
+                setCloudSyncStatus('Cloud settings saved', 'success');
+                showNotification('Cloud settings saved');
             });
 
             downloadEasySyncBtn.addEventListener('click', function() {
@@ -1925,7 +1923,7 @@
                 if (currentAction === 'deleteSingle' && currentEditingId) {
                     const result = window.deleteCustomVocab(currentEditingId);
                     if (result.success) {
-                        showNotification('詞彙刪除成功！');
+                        showNotification('Word deleted successfully!');
                         
                         // 更新卡片顯示
                         if (window.updateCard) {

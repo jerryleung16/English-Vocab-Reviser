@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentIndex = 0;
         updateDeckFilterButtons();
         updateVocabList();
-        showNotification(`目前顯示：${getDeckFilterLabel(filter)}`);
+        showNotification(`Showing: ${getDeckFilterLabel(filter)}`);
     }
     
     // 更新詞彙列表函數
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateCard() {
         if (currentVocabList.length === 0) {
             forceCardFront();
-            frontText.textContent = "Done";
+            frontText.textContent = "Finished";
             backKanji.textContent = `No "${getDeckFilterLabel()}" words`;
             backReading.textContent = "";
             backDefinition.textContent = "Use the filter buttons above or change review tags to continue.";
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentStatus === 'known') {
                 reviewStatus.textContent = 'Status: Known';
             } else if (currentStatus === 'dontknow') {
-                reviewStatus.textContent = 'Status: Need Review';
+                reviewStatus.textContent = 'Status: Needs review';
             } else {
                 reviewStatus.textContent = 'Status: Unmarked';
             }
@@ -225,9 +225,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (status === 'dontknow') {
-            showNotification('Marked as Need Review. It stays in active review.');
+            showNotification('Marked as needs review. It stays in active review.');
         } else {
-            showNotification('Marked as Known. Removed from active review.');
+            showNotification('Marked as known. Removed from active review.');
         }
 
         const previousIndex = currentIndex;
