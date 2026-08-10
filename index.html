@@ -844,7 +844,7 @@
                             <input type="text" id="githubSyncPath" class="form-control" value="shared/english-vocab-sync.json">
                         </div>
                         <div class="form-group full-width">
-                            <label for="githubSyncToken">GitHub personal access token (requires contents: read and write)</label>
+                            <label for="githubSyncToken">GitHub personal access token (fine-grained: Contents read/write for this repository)</label>
                             <input type="password" id="githubSyncToken" class="form-control" placeholder="ghp_xxx...">
                         </div>
                     </div>
@@ -859,9 +859,9 @@
                             <i class="fas fa-download"></i> Download from cloud
                         </button>
                     </div>
-                    <div class="cloud-sync-note">
-                        This syncs custom words and your I know it / need more practice progress. For safety, the token is stored only in your current browser.
-                    </div>
+                            <div class="cloud-sync-note">
+                                This syncs custom words and your I know it / need more practice progress. For a fine-grained token, grant access to this repository and enable Contents: Read and write. For a classic token, make sure the <code>repo</code> scope is enabled. The token is stored only in your current browser.
+                            </div>
                     <div id="cloudSyncStatus" class="cloud-sync-status">Not synced yet</div>
                 </div>
             </div>
@@ -1722,7 +1722,7 @@
                 }
 
                 if (status === 403) {
-                    return `${action} failed: permission denied (403). Please confirm that the token has repository contents access.`;
+                    return `${action} failed: permission denied (403). GitHub said: ${bodyText || 'no response body returned'}. Please confirm that the token can write repository contents for this repo. For a fine-grained token, grant access to this repository and enable Contents: Read and write. For a classic token, enable the repo scope.`;
                 }
 
                 return `${action} failed (${status}): ${bodyText}`;
