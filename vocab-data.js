@@ -29,6 +29,29 @@ class VocabStorage {
         const maxId = Math.max(...customVocab.map(item => item.id));
         return maxId + 1;
     }
+
+    normalizeVocab(vocab) {
+        const word = (vocab.word || vocab.hiragana || vocab.englishWord || '').trim();
+        const partOfSpeech = (vocab.partOfSpeech || vocab.kanji || '').trim();
+        const pronunciation = (vocab.pronunciation || '').trim();
+        const cantoneseMeaning = (vocab.cantoneseMeaning || vocab.definition || '').trim();
+        const englishExample = (vocab.englishExample || vocab.example || '').trim();
+        const cantoneseExample = (vocab.cantoneseExample || vocab.translation || '').trim();
+
+        return {
+            word,
+            partOfSpeech,
+            pronunciation,
+            cantoneseMeaning,
+            englishExample,
+            cantoneseExample,
+            hiragana: word,
+            kanji: partOfSpeech,
+            definition: cantoneseMeaning,
+            example: englishExample,
+            translation: cantoneseExample
+        };
+    }
     
     // 獲取自定義詞彙
     getCustomVocab() {
@@ -56,11 +79,12 @@ class VocabStorage {
     // 添加自定義詞彙
     addVocab(vocab) {
         const customVocab = this.getCustomVocab();
+        const normalized = this.normalizeVocab(vocab);
         
         // 檢查是否已存在
         const exists = customVocab.some(item => 
-            item.hiragana === vocab.hiragana && 
-            item.kanji === vocab.kanji
+            (item.word || item.hiragana || '') === normalized.word &&
+            (item.cantoneseMeaning || item.definition || '') === normalized.cantoneseMeaning
         );
         
         if (exists) {
@@ -72,11 +96,7 @@ class VocabStorage {
         
         const newVocab = {
             id: this.nextId++,
-            hiragana: vocab.hiragana,
-            kanji: vocab.kanji || vocab.hiragana,
-            definition: vocab.definition,
-            example: vocab.example || '',
-            translation: vocab.translation || ''
+            ...normalized
         };
         
         customVocab.push(newVocab);
@@ -93,6 +113,7 @@ class VocabStorage {
     updateVocab(id, vocab) {
         const customVocab = this.getCustomVocab();
         const index = customVocab.findIndex(item => item.id === id);
+        const normalized = this.normalizeVocab(vocab);
         
         if (index === -1) {
             return {
@@ -104,8 +125,8 @@ class VocabStorage {
         // 檢查是否與其他詞彙重複（排除自己）
         const duplicate = customVocab.some((item, i) => 
             i !== index &&
-            item.hiragana === vocab.hiragana && 
-            item.kanji === vocab.kanji
+            (item.word || item.hiragana || '') === normalized.word &&
+            (item.cantoneseMeaning || item.definition || '') === normalized.cantoneseMeaning
         );
         
         if (duplicate) {
@@ -118,11 +139,7 @@ class VocabStorage {
         // 更新詞彙
         customVocab[index] = {
             id: id,
-            hiragana: vocab.hiragana,
-            kanji: vocab.kanji || vocab.hiragana,
-            definition: vocab.definition,
-            example: vocab.example || '',
-            translation: vocab.translation || ''
+            ...normalized
         };
         
         const saved = this.saveCustomVocab(customVocab);

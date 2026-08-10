@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Vocabulary Learner</title>
+    <title>英文詞彙學習卡</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -558,17 +558,17 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-book"></i> English Vocabulary Learner</h1>
-            <p class="subtitle">Tap a card to reveal the answer and strengthen your English vocabulary.</p>
+            <h1><i class="fas fa-book"></i> 英文詞彙學習卡</h1>
+            <p class="subtitle">點擊卡片睇答案，配合廣東話解釋同地道例句去學英文。</p>
         </header>
 
         <div class="controls">
             <div class="mode-selector">
                 <button id="mode1" class="mode-btn active">
-                    <i class="fas fa-language"></i> Mode 1: Word → Meaning
+                    <i class="fas fa-language"></i> 模式 1：詞彙 → 解釋
                 </button>
                 <button id="mode2" class="mode-btn">
-                    <i class="fas fa-book-open"></i> Mode 2: Meaning → Word
+                    <i class="fas fa-book-open"></i> 模式 2：解釋 → 詞彙
                 </button>
             </div>
             
@@ -581,22 +581,22 @@
             
             <div class="buttons">
                 <button id="prevBtn" class="nav-btn">
-                    <i class="fas fa-arrow-left"></i> Previous
+                    <i class="fas fa-arrow-left"></i> 上一個
                 </button>
                 <button id="shuffleBtn" class="action-btn">
-                    <i class="fas fa-random"></i> Shuffle
+                    <i class="fas fa-random"></i> 隨機排序
                 </button>
                 <button id="nextBtn" class="nav-btn">
-                    Next <i class="fas fa-arrow-right"></i>
+                    下一個 <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
             
             <div class="action-buttons">
                 <button id="resetReviewBtn" class="action-btn action-btn-small">
-                    <i class="fas fa-undo"></i> Reset progress
+                    <i class="fas fa-undo"></i> 重設進度
                 </button>
                 <button id="manageBtn" class="action-btn action-btn-small">
-                    <i class="fas fa-cog"></i> Manage words
+                    <i class="fas fa-cog"></i> 管理詞彙
                 </button>
             </div>
         </div>
@@ -606,40 +606,45 @@
                 <div class="card-front">
                     <div class="card-content">
                         <div class="card-header">
-                            <span class="card-label" id="frontLabel">Word</span>
-                            <span class="hint">Tap the card to reveal the answer</span>
+                            <span class="card-label" id="frontLabel">英文詞彙</span>
+                            <span class="hint">點擊卡片睇答案</span>
                         </div>
                         <div class="word-display">
-                            <h2 id="frontText">Loading...</h2>
+                            <h2 id="frontText">載入中...</h2>
                         </div>
                         <div class="card-footer">
-                            <i class="fas fa-hand-point-up"></i> Tap to flip the card
+                            <i class="fas fa-hand-point-up"></i> 點擊卡片翻面
                         </div>
                     </div>
                 </div>
                 <div class="card-back">
                     <div class="card-content">
                         <div class="card-header">
-                            <span class="card-label" id="backLabel">Answer</span>
+                            <span class="card-label" id="backLabel">答案</span>
                         </div>
                         <div class="answer-content">
-                            <div class="kanji-section">
-                                <h3 id="backKanji">Word</h3>
-                                <div class="reading" id="backReading">Meaning</div>
+                            <div class="word-main">
+                                <h3 id="backWord">詞彙</h3>
+                                <div class="word-meta">
+                                    <div class="meta-pill"><strong>詞性</strong><span id="backPartOfSpeech">-</span></div>
+                                    <div class="meta-pill"><strong>讀音</strong><span id="backPronunciation">-</span></div>
+                                </div>
                             </div>
                             <div class="definition-section">
-                                <h4><i class="fas fa-book-open"></i> Meaning</h4>
-                                <p id="backDefinition">Meaning will appear here</p>
+                                <h4><i class="fas fa-comment-dots"></i> 廣東話解法</h4>
+                                <p id="backCantoneseMeaning">廣東話解法會顯示喺呢度</p>
                             </div>
                             <div class="example-section">
-                                <h4><i class="fas fa-comment"></i> Example sentence</h4>
-                                <p id="backExample">Example sentence will appear here</p>
-                                <p class="translation" id="backTranslation">Example translation will appear here</p>
+                                <h4><i class="fas fa-language"></i> 地道廣東話例句</h4>
+                                <p class="example-label">English</p>
+                                <p id="backEnglishExample">英文例句會顯示喺呢度</p>
+                                <p class="example-label">廣東話口語</p>
+                                <p id="backCantoneseExample">廣東話口語例句會顯示喺呢度</p>
                             </div>
                         </div>
-                        <div class="review-status" id="reviewStatus">Not marked yet</div>
+                        <div class="review-status" id="reviewStatus">未標記</div>
                         <div class="card-footer">
-                            <i class="fas fa-redo"></i> Tap the card to flip back
+                            <i class="fas fa-redo"></i> 點擊卡片翻返
                         </div>
                     </div>
                 </div>
@@ -648,27 +653,27 @@
 
         <div class="review-panel">
             <div class="review-summary" id="reviewSummary">
-                <span class="summary-pill summary-pill-pending">New: <strong id="pendingCount">0</strong></span>
-                <span class="summary-pill summary-pill-know">Known: <strong id="knownCount">0</strong></span>
-                <span class="summary-pill summary-pill-dontknow">Needs review: <strong id="dontKnowCount">0</strong></span>
+                <span class="summary-pill summary-pill-pending">未開始：<strong id="pendingCount">0</strong></span>
+                <span class="summary-pill summary-pill-know">我識咗：<strong id="knownCount">0</strong></span>
+                <span class="summary-pill summary-pill-dontknow">要再練：<strong id="dontKnowCount">0</strong></span>
             </div>
             <div class="deck-filter-actions">
                 <button id="deckPendingBtn" class="deck-filter-btn active" type="button">
-                    New
+                    未開始
                 </button>
                 <button id="deckDontKnowBtn" class="deck-filter-btn" type="button">
-                    Needs review
+                    要再練
                 </button>
                 <button id="deckKnownBtn" class="deck-filter-btn" type="button">
-                    <i class="fas fa-check"></i> Known
+                    <i class="fas fa-check"></i> 我識咗
                 </button>
             </div>
             <div class="review-actions review-actions-outside">
                 <button id="knowBtn" class="review-btn review-btn-know" type="button">
-                    <i class="fas fa-check"></i> I know it
+                    <i class="fas fa-check"></i> 我識咗
                 </button>
                 <button id="dontKnowBtn" class="review-btn review-btn-dontknow" type="button">
-                    <i class="fas fa-times"></i> Need more practice
+                    <i class="fas fa-times"></i> 要再練
                 </button>
             </div>
         </div>
@@ -682,63 +687,66 @@
             </div>
             
             <div class="tab-content active" id="singleTab">
-                <h3><i class="fas fa-plus-circle"></i> Add a new word</h3>
+                <h3><i class="fas fa-plus-circle"></i> 新增英文詞彙</h3>
                 <div class="form-group">
-                    <label for="hiraganaInput">English word (required)</label>
-                    <input type="text" id="hiraganaInput" class="form-control" placeholder="Example: diligent">
+                    <label for="hiraganaInput">英文詞彙（必填）</label>
+                    <input type="text" id="hiraganaInput" class="form-control" placeholder="例如：prevailing">
                 </div>
                 <div class="form-group">
-                    <label for="kanjiInput">Translation or note (optional)</label>
-                    <input type="text" id="kanjiInput" class="form-control" placeholder="Example: hardworking">
+                    <label for="partOfSpeechInput">詞性（可選）</label>
+                    <input type="text" id="partOfSpeechInput" class="form-control" placeholder="例如：Adjective">
                 </div>
                 <div class="form-group">
-                    <label for="definitionInput">Meaning (required)</label>
-                    <input type="text" id="definitionInput" class="form-control" placeholder="Example: showing care and effort in your work">
+                    <label for="pronunciationInput">讀音（可選）</label>
+                    <input type="text" id="pronunciationInput" class="form-control" placeholder="例如：/prɪˈveɪ.lɪŋ/">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInput">Example sentence (optional)</label>
-                    <textarea id="exampleInput" class="form-control" rows="2" placeholder="Example: She is a diligent student who always finishes her homework."></textarea>
+                    <label for="definitionInput">廣東話解法（必填）</label>
+                    <textarea id="definitionInput" class="form-control" rows="2" placeholder="例如：指一個時期入面最普遍、最主流、最有影響力嘅做法或觀點。"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="translationInput">Example translation (optional)</label>
-                    <textarea id="translationInput" class="form-control" rows="2" placeholder="Example: 她是一个勤奋的学生，总是按时完成作业。"></textarea>
+                    <label for="exampleInput">English example sentence（可選）</label>
+                    <textarea id="exampleInput" class="form-control" rows="2" placeholder="例如：The prevailing opinion is that remote work is here to stay."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="translationInput">廣東話口語（可選）</label>
+                    <textarea id="translationInput" class="form-control" rows="2" placeholder="例如：而家主流睇法係遠程工作會繼續存在。"></textarea>
                 </div>
                 <div class="btn-group">
                     <button id="addVocabBtn" class="btn-primary">
-                        <i class="fas fa-save"></i> Save word
+                        <i class="fas fa-save"></i> 儲存詞彙
                     </button>
                     <button id="clearFormBtn" class="btn-secondary">
-                        <i class="fas fa-eraser"></i> Clear form
+                        <i class="fas fa-eraser"></i> 清空表格
                     </button>
                 </div>
             </div>
             
             <div class="tab-content" id="bulkTab">
-                <h3><i class="fas fa-file-import"></i> Import words in bulk</h3>
-                <p>Enter your words in this format, one per line, separated by "|":</p>
+                <h3><i class="fas fa-file-import"></i> 批量匯入詞彙</h3>
+                <p>請用以下格式逐行輸入，每行用「|」分隔：</p>
                 <div class="format-guide">
-                    <p><strong>Format:</strong> word|meaning|example sentence|example translation</p>
-                    <p><strong>Example:</strong></p>
-                    <code>curious|eager to learn or know something|She is curious about how the machine works.|她对机器是如何工作的很好奇。</code><br>
-                    <code>confident|feeling sure about your abilities|He spoke confidently in the interview.|他在面试中自信地说话。</code>
-                    <p class="small">Note: The word and meaning are required. The example sentence and translation can be left blank.</p>
+                    <p><strong>格式：</strong> word|part of speech|pronunciation|cantonese meaning|english example|cantonese example</p>
+                    <p><strong>例子：</strong></p>
+                    <code>prevailing|Adjective|/prɪˈveɪ.lɪŋ/|指一個時期入面最普遍、最主流、最有影響力嘅做法或觀點。|The prevailing opinion is that remote work is here to stay.|而家主流睇法係遠程工作會繼續存在。</code>
+                    <p class="small">注意：英文詞彙同廣東話解法係必填，其餘欄位可以留空。</p>
                 </div>
                 <div class="form-group">
-                    <label for="bulkInput">Bulk input</label>
-                    <textarea id="bulkInput" class="form-control textarea-control" placeholder="Paste your vocabulary data here..."></textarea>
+                    <label for="bulkInput">批量輸入</label>
+                    <textarea id="bulkInput" class="form-control textarea-control" placeholder="將詞彙資料貼喺呢度..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Preview (first 3 entries):</label>
+                    <label>預覽（前 3 個詞彙）：</label>
                     <div id="bulkPreview" class="format-guide">
-                        Enter some data to preview it...
+                        輸入資料後就會顯示預覽...
                     </div>
                 </div>
                 <div class="btn-group">
                     <button id="importBulkBtn" class="btn-success">
-                        <i class="fas fa-file-import"></i> Import words
+                        <i class="fas fa-file-import"></i> 匯入詞彙
                     </button>
                     <button id="clearBulkBtn" class="btn-secondary">
-                        <i class="fas fa-eraser"></i> Clear input
+                        <i class="fas fa-eraser"></i> 清空輸入
                     </button>
                 </div>
             </div>
@@ -752,8 +760,8 @@
                 
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-filter="all">All words</button>
-                    <button class="filter-btn" data-filter="custom">Custom words</button>
-                    <button class="filter-btn" data-filter="original">Built-in words</button>
+                    <button class="filter-btn" data-filter="custom">自定義詞彙</button>
+                    <button class="filter-btn" data-filter="original">內置詞彙</button>
                 </div>
                 
                 <div id="vocabList" class="vocab-list">
@@ -775,26 +783,26 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="originalCount">0</div>
-                        <div class="stat-label">Built-in words</div>
+                        <div class="stat-label">內置詞彙</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="customCount">0</div>
-                        <div class="stat-label">Custom words</div>
+                        <div class="stat-label">自定義詞彙</div>
                     </div>
                 </div>
                 <div class="btn-group">
                     <button id="resetCustomBtn" class="btn-warning">
-                        <i class="fas fa-trash"></i> Delete all custom words
+                        <i class="fas fa-trash"></i> 刪除所有自定義詞彙
                     </button>
                     <button id="resetAllBtn" class="btn-danger">
-                        <i class="fas fa-redo"></i> Reset to built-in data
+                        <i class="fas fa-redo"></i> 重設為內置資料
                     </button>
                 </div>
                 <div class="format-guide">
                     <p><i class="fas fa-info-circle"></i> Notes:</p>
                     <ul>
-                        <li>Custom words are stored in your browser and will not affect other users.</li>
-                        <li>Built-in words cannot be edited or deleted.</li>
+                        <li>自定義詞彙會儲存喺你嘅瀏覽器，唔會影響其他人。</li>
+                        <li>內置詞彙唔可以編輯或刪除。</li>
                         <li>Reset actions cannot be undone, so use them carefully.</li>
                     </ul>
                 </div>
@@ -861,45 +869,49 @@
 
         <!-- 編輯詞彙表單（隱藏，用於編輯時彈出） -->
         <div class="edit-form" id="editForm">
-            <h3><i class="fas fa-edit"></i> Edit word</h3>
+            <h3><i class="fas fa-edit"></i> 編輯詞彙</h3>
             <div class="form-group">
-                <label for="editHiragana">English word (required)</label>
+                <label for="editHiragana">英文詞彙（必填）</label>
                 <input type="text" id="editHiragana" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editKanji">Translation or note (optional)</label>
-                <input type="text" id="editKanji" class="form-control">
+                <label for="editPartOfSpeech">詞性（可選）</label>
+                <input type="text" id="editPartOfSpeech" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editDefinition">Meaning (required)</label>
-                <input type="text" id="editDefinition" class="form-control">
+                <label for="editPronunciation">讀音（可選）</label>
+                <input type="text" id="editPronunciation" class="form-control">
             </div>
             <div class="form-group">
-                <label for="editExample">Example sentence (optional)</label>
+                <label for="editDefinition">廣東話解法（必填）</label>
+                <textarea id="editDefinition" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editExample">English example sentence（可選）</label>
                 <textarea id="editExample" class="form-control" rows="2"></textarea>
             </div>
             <div class="form-group">
-                <label for="editTranslation">Example translation (optional)</label>
+                <label for="editTranslation">廣東話口語（可選）</label>
                 <textarea id="editTranslation" class="form-control" rows="2"></textarea>
             </div>
             <div class="btn-group">
                 <button id="saveEditBtn" class="btn-primary">
-                    <i class="fas fa-save"></i> Save changes
+                    <i class="fas fa-save"></i> 儲存修改
                 </button>
                 <button id="cancelEditBtn" class="btn-secondary">
-                    <i class="fas fa-times"></i> Cancel
+                    <i class="fas fa-times"></i> 取消
                 </button>
             </div>
         </div>
 
         <div class="instructions">
-            <h3><i class="fas fa-info-circle"></i> How it works</h3>
+            <h3><i class="fas fa-info-circle"></i> 點樣用</h3>
             <ul>
-                <li><strong>Mode 1</strong>: the front shows the word, and the back shows the meaning and example sentence.</li>
-                <li><strong>Mode 2</strong>: the front shows the meaning, and the back shows the word and example sentence.</li>
-                <li><strong>Study flow</strong>: tap the card to reveal the answer, then use the buttons to mark words you know or want to review.</li>
-                <li><strong>Manage words</strong>: open Manage words to add, edit, or delete your own vocabulary entries.</li>
-                <li><strong>Data saving</strong>: your custom words are saved automatically in your browser.</li>
+                <li><strong>模式 1</strong>：正面顯示英文詞彙，背面顯示廣東話解法同例句。</li>
+                <li><strong>模式 2</strong>：正面顯示廣東話解法，背面顯示英文詞彙同例句。</li>
+                <li><strong>學習流程</strong>：點擊卡片睇答案，再用按鈕標記你識唔識。</li>
+                <li><strong>管理詞彙</strong>：打開「管理詞彙」即可新增、編輯或刪除你嘅詞庫。</li>
+                <li><strong>資料保存</strong>：你新增嘅詞彙會自動保存喺你嘅瀏覽器入面。</li>
             </ul>
         </div>
     </div>
@@ -907,18 +919,18 @@
     <!-- 確認對話框 -->
     <div class="confirmation-dialog" id="confirmDialog">
         <div class="dialog-content">
-            <h3 id="dialogTitle">Confirm action</h3>
-            <p id="dialogMessage">Are you sure you want to perform this action?</p>
+            <h3 id="dialogTitle">確認操作</h3>
+            <p id="dialogMessage">你確定要執行呢個操作？</p>
             <div class="btn-group">
-                <button id="dialogConfirmBtn" class="btn-primary">Confirm</button>
-                <button id="dialogCancelBtn" class="btn-secondary">Cancel</button>
+                <button id="dialogConfirmBtn" class="btn-primary">確認</button>
+                <button id="dialogCancelBtn" class="btn-secondary">取消</button>
             </div>
         </div>
     </div>
 
     <!-- 通知訊息 -->
     <div class="notification" id="notification">
-        <span id="notificationMessage">Success!</span>
+        <span id="notificationMessage">完成！</span>
     </div>
 
     <script src="vocab-data.js"></script>
@@ -934,7 +946,8 @@
             
             // 單個添加元素
             const hiraganaInput = document.getElementById('hiraganaInput');
-            const kanjiInput = document.getElementById('kanjiInput');
+            const partOfSpeechInput = document.getElementById('partOfSpeechInput');
+            const pronunciationInput = document.getElementById('pronunciationInput');
             const definitionInput = document.getElementById('definitionInput');
             const exampleInput = document.getElementById('exampleInput');
             const translationInput = document.getElementById('translationInput');
@@ -956,7 +969,8 @@
             // 編輯表單元素
             const editForm = document.getElementById('editForm');
             const editHiragana = document.getElementById('editHiragana');
-            const editKanji = document.getElementById('editKanji');
+            const editPartOfSpeech = document.getElementById('editPartOfSpeech');
+            const editPronunciation = document.getElementById('editPronunciation');
             const editDefinition = document.getElementById('editDefinition');
             const editExample = document.getElementById('editExample');
             const editTranslation = document.getElementById('editTranslation');
@@ -1053,7 +1067,8 @@
             // 清空表單
             clearFormBtn.addEventListener('click', function() {
                 hiraganaInput.value = '';
-                kanjiInput.value = '';
+                partOfSpeechInput.value = '';
+                pronunciationInput.value = '';
                 definitionInput.value = '';
                 exampleInput.value = '';
                 translationInput.value = '';
@@ -1062,7 +1077,8 @@
             // 添加單個詞彙
             addVocabBtn.addEventListener('click', function() {
                 const hiragana = hiraganaInput.value.trim();
-                const kanji = kanjiInput.value.trim();
+                const partOfSpeech = partOfSpeechInput.value.trim();
+                const pronunciation = pronunciationInput.value.trim();
                 const definition = definitionInput.value.trim();
                 const example = exampleInput.value.trim();
                 const translation = translationInput.value.trim();
@@ -1075,11 +1091,12 @@
                 
                 // 添加詞彙
                 const result = window.addCustomVocab({
-                    hiragana: hiragana,
-                    kanji: kanji || hiragana,
-                    definition: definition,
-                    example: example,
-                    translation: translation
+                    word: hiragana,
+                    partOfSpeech: partOfSpeech,
+                    pronunciation: pronunciation,
+                    cantoneseMeaning: definition,
+                    englishExample: example,
+                    cantoneseExample: translation
                 });
                 
                 if (result.success) {
@@ -1092,7 +1109,7 @@
                     }
                     
                     // 顯示成功訊息
-                    showNotification(`Added word: ${kanji || hiragana}`);
+                    showNotification(`Added word: ${hiragana}`);
                     
                     // 更新統計數據
                     updateStats();
@@ -1130,25 +1147,25 @@
                 lines.forEach((line, index) => {
                     const parts = line.split('|').map(part => part.trim());
                     
-                    // 驗證格式
-                    if (parts.length < 3) {
-                        errors.push(`Line ${index + 1}: format is invalid (at least 3 fields are required)`);
+                    if (parts.length < 4) {
+                        errors.push(`Line ${index + 1}: format is invalid (at least 4 fields are required)`);
                         return;
                     }
                     
-                    const [hiragana, kanji, definition, example, translation] = parts;
+                    const [word, partOfSpeech, pronunciation, cantoneseMeaning, englishExample = '', cantoneseExample = ''] = parts;
                     
-                    if (!hiragana || !definition) {
-                        errors.push(`Line ${index + 1}: the word and meaning cannot be empty`);
+                    if (!word || !cantoneseMeaning) {
+                        errors.push(`Line ${index + 1}: the word and Cantonese meaning cannot be empty`);
                         return;
                     }
                     
                     importedVocab.push({
-                        hiragana: hiragana,
-                        kanji: kanji || hiragana,
-                        definition: definition,
-                        example: example || '',
-                        translation: translation || ''
+                        word: word,
+                        partOfSpeech: partOfSpeech || '',
+                        pronunciation: pronunciation || '',
+                        cantoneseMeaning: cantoneseMeaning,
+                        englishExample: englishExample,
+                        cantoneseExample: cantoneseExample
                     });
                 });
                 
@@ -1272,7 +1289,8 @@
             // 保存編輯
             saveEditBtn.addEventListener('click', function() {
                 const hiragana = editHiragana.value.trim();
-                const kanji = editKanji.value.trim();
+                const partOfSpeech = editPartOfSpeech.value.trim();
+                const pronunciation = editPronunciation.value.trim();
                 const definition = editDefinition.value.trim();
                 const example = editExample.value.trim();
                 const translation = editTranslation.value.trim();
@@ -1290,11 +1308,12 @@
                 
                 // 更新詞彙
                 const result = window.updateCustomVocab(currentEditingId, {
-                    hiragana: hiragana,
-                    kanji: kanji || hiragana,
-                    definition: definition,
-                    example: example,
-                    translation: translation
+                    word: hiragana,
+                    partOfSpeech: partOfSpeech,
+                    pronunciation: pronunciation,
+                    cantoneseMeaning: definition,
+                    englishExample: example,
+                    cantoneseExample: translation
                 });
                 
                 if (result.success) {
@@ -1308,7 +1327,7 @@
                     }
                     
                     // 顯示成功訊息
-                    showNotification('Word updated successfully!');
+                    showNotification('詞彙更新成功！');
                     
                     // 重新載入詞彙列表
                     loadVocabList();
@@ -1324,7 +1343,7 @@
             function updateBulkPreview() {
                 const text = bulkInput.value.trim();
                 if (!text) {
-                    bulkPreview.innerHTML = 'Enter data to preview it...';
+                    bulkPreview.innerHTML = '輸入資料後會喺呢度預覽...';
                     return;
                 }
                 
@@ -1357,9 +1376,14 @@
                     // 搜索篩選
                     if (currentSearch) {
                         const searchLower = currentSearch.toLowerCase();
-                        return vocab.hiragana.toLowerCase().includes(searchLower) ||
-                               vocab.kanji.toLowerCase().includes(searchLower) ||
-                               vocab.definition.toLowerCase().includes(searchLower);
+                        const wordText = (vocab.word || vocab.hiragana || '').toLowerCase();
+                        const partOfSpeechText = (vocab.partOfSpeech || vocab.kanji || '').toLowerCase();
+                        const meaningText = (vocab.cantoneseMeaning || vocab.definition || '').toLowerCase();
+                        const exampleText = (vocab.englishExample || vocab.example || '').toLowerCase();
+                        return wordText.includes(searchLower) ||
+                               partOfSpeechText.includes(searchLower) ||
+                               meaningText.includes(searchLower) ||
+                               exampleText.includes(searchLower);
                     }
                     return true;
                 });
@@ -1386,8 +1410,8 @@
                     const message = document.createElement('div');
                     message.className = 'no-vocab-message';
                     message.innerHTML = currentSearch ? 
-                        `<p>No words match "${currentSearch}"</p>` :
-                        `<p>No words available yet. Add a word to get started.</p>`;
+                        `<p>冇任何詞彙符合「${currentSearch}」</p>` :
+                        `<p>目前仲未有詞彙，快啲新增一個啦！</p>`;
                     vocabList.appendChild(message);
                     
                     // 清空分頁
@@ -1413,30 +1437,33 @@
                 
                 const isCustom = vocab.id >= 1000;
                 const badgeType = isCustom ? 'badge-custom' : 'badge-original';
-                const badgeText = isCustom ? 'Custom' : 'Built-in';
+                const badgeText = isCustom ? '自定義' : '內置';
+                const wordText = vocab.word || vocab.hiragana || '';
+                const partOfSpeechText = vocab.partOfSpeech || vocab.kanji || '';
+                const meaningText = vocab.cantoneseMeaning || vocab.definition || '';
                 
                 item.innerHTML = `
                     <div class="vocab-content">
                         <div class="vocab-info">
-                            <span class="vocab-hiragana">${vocab.hiragana}</span>
-                            <span class="vocab-kanji">${vocab.kanji}</span>
+                            <span class="vocab-hiragana">${wordText}</span>
+                            <span class="vocab-kanji">${partOfSpeechText}</span>
                             <span class="vocab-badge ${badgeType}">${badgeText}</span>
                         </div>
-                        <div class="vocab-definition">${vocab.definition}</div>
+                        <div class="vocab-definition">${meaningText}</div>
                     </div>
                     <div class="vocab-actions">
                         ${isCustom ? `
                             <button class="action-btn-icon edit-btn" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="action-btn-icon delete-btn" title="Delete">
+                            <button class="action-btn-icon delete-btn" title="刪除">
                                 <i class="fas fa-trash"></i>
                             </button>
                         ` : `
                             <button class="action-btn-icon edit-btn" title="Built-in words cannot be edited" disabled>
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="action-btn-icon delete-btn" title="Built-in words cannot be deleted" disabled>
+                            <button class="action-btn-icon delete-btn" title="內置詞彙唔可以刪除" disabled>
                                 <i class="fas fa-trash"></i>
                             </button>
                         `}
@@ -1465,11 +1492,12 @@
                 currentEditingId = vocab.id;
                 
                 // 填充表單數據
-                editHiragana.value = vocab.hiragana;
-                editKanji.value = vocab.kanji;
-                editDefinition.value = vocab.definition;
-                editExample.value = vocab.example || '';
-                editTranslation.value = vocab.translation || '';
+                editHiragana.value = vocab.word || vocab.hiragana || '';
+                editPartOfSpeech.value = vocab.partOfSpeech || vocab.kanji || '';
+                editPronunciation.value = vocab.pronunciation || '';
+                editDefinition.value = vocab.cantoneseMeaning || vocab.definition || '';
+                editExample.value = vocab.englishExample || vocab.example || '';
+                editTranslation.value = vocab.cantoneseExample || vocab.translation || '';
                 
                 // 顯示編輯表單
                 editForm.classList.add('active');
@@ -1483,8 +1511,8 @@
                 currentAction = 'deleteSingle';
                 currentEditingId = vocab.id;
                 
-                dialogTitle.textContent = 'Delete word';
-                dialogMessage.textContent = `Are you sure you want to delete the word "${vocab.kanji || vocab.hiragana}"? This cannot be undone.`;
+                dialogTitle.textContent = '刪除詞彙';
+                dialogMessage.textContent = `你確定要刪除詞彙「${vocab.word || vocab.hiragana || vocab.kanji || ''}」？呢個操作不能復原。`;
                 confirmDialog.classList.add('active');
             }
             
@@ -1866,7 +1894,7 @@ setCloudSyncStatus('Uploading to the cloud...');
             }
             
             // 為表單添加Enter鍵提交功能
-            const formInputs = [hiraganaInput, kanjiInput, definitionInput, exampleInput, translationInput];
+            const formInputs = [hiraganaInput, partOfSpeechInput, pronunciationInput, definitionInput, exampleInput, translationInput];
             formInputs.forEach(input => {
                 input.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -1877,7 +1905,7 @@ setCloudSyncStatus('Uploading to the cloud...');
             });
             
             // 為編輯表單添加Enter鍵提交功能
-            const editInputs = [editHiragana, editKanji, editDefinition, editExample, editTranslation];
+            const editInputs = [editHiragana, editPartOfSpeech, editPronunciation, editDefinition, editExample, editTranslation];
             editInputs.forEach(input => {
                 input.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -1923,7 +1951,7 @@ setCloudSyncStatus('Uploading to the cloud...');
                 if (currentAction === 'deleteSingle' && currentEditingId) {
                     const result = window.deleteCustomVocab(currentEditingId);
                     if (result.success) {
-                        showNotification('Word deleted successfully!');
+                        showNotification('詞彙刪除成功！');
                         
                         // 更新卡片顯示
                         if (window.updateCard) {

@@ -3,11 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 取得DOM元素
     const vocabCard = document.getElementById('vocabCard');
     const frontText = document.getElementById('frontText');
-    const backKanji = document.getElementById('backKanji');
-    const backReading = document.getElementById('backReading');
-    const backDefinition = document.getElementById('backDefinition');
-    const backExample = document.getElementById('backExample');
-    const backTranslation = document.getElementById('backTranslation');
+    const backWord = document.getElementById('backWord');
+    const backPartOfSpeech = document.getElementById('backPartOfSpeech');
+    const backPronunciation = document.getElementById('backPronunciation');
+    const backCantoneseMeaning = document.getElementById('backCantoneseMeaning');
+    const backEnglishExample = document.getElementById('backEnglishExample');
+    const backCantoneseExample = document.getElementById('backCantoneseExample');
     const frontLabel = document.getElementById('frontLabel');
     const backLabel = document.getElementById('backLabel');
     
@@ -35,10 +36,34 @@ document.addEventListener('DOMContentLoaded', function() {
     let isFlipped = false;
     let currentDeckFilter = 'pending'; // pending | dontknow | known
 
+    function getWordText(vocab) {
+        return vocab?.word || vocab?.hiragana || '';
+    }
+
+    function getPartOfSpeech(vocab) {
+        return vocab?.partOfSpeech || vocab?.kanji || '';
+    }
+
+    function getPronunciation(vocab) {
+        return vocab?.pronunciation || '';
+    }
+
+    function getCantoneseMeaning(vocab) {
+        return vocab?.cantoneseMeaning || vocab?.definition || '';
+    }
+
+    function getEnglishExample(vocab) {
+        return vocab?.englishExample || vocab?.example || '';
+    }
+
+    function getCantoneseExample(vocab) {
+        return vocab?.cantoneseExample || vocab?.translation || '';
+    }
+
     function getDeckFilterLabel(filter = currentDeckFilter) {
-        if (filter === 'known') return 'Known';
-        if (filter === 'dontknow') return 'Need Review';
-        return 'Unmarked';
+        if (filter === 'known') return '我識咗';
+        if (filter === 'dontknow') return '要再練';
+        return '未開始';
     }
 
     function filterVocabByDeck(vocabList, filter = currentDeckFilter) {
@@ -123,12 +148,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateCard() {
         if (currentVocabList.length === 0) {
             forceCardFront();
-            frontText.textContent = "Finished";
-            backKanji.textContent = `No "${getDeckFilterLabel()}" words`;
-            backReading.textContent = "";
-            backDefinition.textContent = "Use the filter buttons above or change review tags to continue.";
-            backExample.textContent = "";
-            backTranslation.textContent = "";
+            frontText.textContent = "完成";
+            if (backWord) backWord.textContent = `No "${getDeckFilterLabel()}" words`;
+            if (backPartOfSpeech) backPartOfSpeech.textContent = '-';
+            if (backPronunciation) backPronunciation.textContent = '-';
+            if (backCantoneseMeaning) backCantoneseMeaning.textContent = "用上面嘅篩選按鈕，或者改變標記再繼續。」;
+            if (backEnglishExample) backEnglishExample.textContent = "";
+            if (backCantoneseExample) backCantoneseExample.textContent = "";
             if (reviewStatus) reviewStatus.textContent = `Current deck: ${getDeckFilterLabel()}`;
             updateProgress();
             return;
@@ -144,44 +170,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentStatus = window.getVocabStatus ? window.getVocabStatus(currentVocab.id) : 'pending';
         if (reviewStatus) {
             if (currentStatus === 'known') {
-                reviewStatus.textContent = 'Status: Known';
+                reviewStatus.textContent = '狀態：我識咗';
             } else if (currentStatus === 'dontknow') {
-                reviewStatus.textContent = 'Status: Needs review';
+                reviewStatus.textContent = '狀態：要再練';
             } else {
-                reviewStatus.textContent = 'Status: Unmarked';
+                reviewStatus.textContent = '狀態：未標記';
             }
         }
 
+        const wordText = getWordText(currentVocab);
+        const partOfSpeechText = getPartOfSpeech(currentVocab) || '—';
+        const pronunciationText = getPronunciation(currentVocab) || '—';
+        const cantoneseMeaningText = getCantoneseMeaning(currentVocab);
+        const englishExampleText = getEnglishExample(currentVocab);
+        const cantoneseExampleText = getCantoneseExample(currentVocab);
+
         if (currentMode === 1) {
-            // Mode 1: front shows word, back shows meaning + details
-            frontLabel.textContent = "Word";
-            backLabel.textContent = "Meaning + Details";
-            frontText.textContent = currentVocab.hiragana;
-            backKanji.textContent = currentVocab.kanji;
-            backReading.textContent = `Word: ${currentVocab.hiragana}`;
-            backDefinition.innerHTML = currentVocab.definition;
-            backExample.innerHTML = currentVocab.example;
-            backTranslation.textContent = currentVocab.translation;
-            
-            // Mark custom vocabulary
-            if (currentVocab.id >= 1000) {
-                backReading.textContent += ' (Custom)';
-            }
+            frontLabel.textContent = "英文詞彙";
+            backLabel.textContent = "答案";
+            frontText.textContent = wordText || '詞彙';
+            if (backWord) backWord.textContent = wordText || '詞彙';
+            if (backPartOfSpeech) backPartOfSpeech.textContent = partOfSpeechText;
+            if (backPronunciation) backPronunciation.textContent = pronunciationText;
+            if (backCantoneseMeaning) backCantoneseMeaning.innerHTML = cantoneseMeaningText || '未提供廣東話解法';
+            if (backEnglishExample) backEnglishExample.innerHTML = englishExampleText || '未提供英文例句';
+            if (backCantoneseExample) backCantoneseExample.innerHTML = cantoneseExampleText || '未提供廣東話口語';
         } else {
-            // Mode 2: front shows meaning, back shows word + details
-            frontLabel.textContent = "Meaning";
-            backLabel.textContent = "Word + Details";
-            frontText.textContent = currentVocab.kanji;
-            backKanji.textContent = currentVocab.hiragana;
-            backReading.textContent = `Meaning: ${currentVocab.kanji}`;
-            backDefinition.innerHTML = currentVocab.definition;
-            backExample.innerHTML = currentVocab.example;
-            backTranslation.textContent = currentVocab.translation;
-            
-            // Mark custom vocabulary
-            if (currentVocab.id >= 1000) {
-                backReading.textContent += ' (Custom)';
-            }
+            frontLabel.textContent = "廣東話解法";
+            backLabel.textContent = "答案";
+            frontText.textContent = cantoneseMeaningText || '廣東話解法';
+            if (backWord) backWord.textContent = wordText || '詞彙';
+            if (backPartOfSpeech) backPartOfSpeech.textContent = partOfSpeechText;
+            if (backPronunciation) backPronunciation.textContent = pronunciationText;
+            if (backCantoneseMeaning) backCantoneseMeaning.innerHTML = cantoneseMeaningText || '未提供廣東話解法';
+            if (backEnglishExample) backEnglishExample.innerHTML = englishExampleText || '未提供英文例句';
+            if (backCantoneseExample) backCantoneseExample.innerHTML = cantoneseExampleText || '未提供廣東話口語';
         }
         
         updateProgress();
@@ -225,9 +248,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (status === 'dontknow') {
-            showNotification('Marked as needs review. It stays in active review.');
+            showNotification('標記為「要再練」。佢會留喺當前複習隊列。');
         } else {
-            showNotification('Marked as known. Removed from active review.');
+            showNotification('標記為「我識咗」。已由當前複習中移除。');
         }
 
         const previousIndex = currentIndex;
@@ -254,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentIndex = 0;
         updateVocabList();
         forceCardFront();
-        showNotification('All review tags have been reset.');
+        showNotification('所有複習標記已重設。');
     }
     
     // 切換模式
@@ -315,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCard();
         
         // 顯示提示
-        showNotification('Vocabulary order shuffled!');
+        showNotification('詞彙順序已隨機改變！');
     }
     
     // 處理鍵盤按鍵
