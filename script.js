@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
     let isFlipped = false;
     let currentDeckFilter = 'pending'; // pending | dontknow | known
+    let currentVocabList = [];
 
     function getWordText(vocab) {
         return vocab?.word || vocab?.hiragana || '';
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 更新詞彙列表函數
     function updateVocabList() {
-        const allVocab = window.getAllVocabData ? window.getAllVocabData() : window.vocabStorage.getAllVocab();
+        const allVocab = window.getAllVocabData ? window.getAllVocabData() : (window.vocabStorage ? window.vocabStorage.getAllVocab() : []);
         currentVocabList = filterVocabByDeck(allVocab, currentDeckFilter);
         currentVocabList = Array.isArray(currentVocabList) ? currentVocabList : [];
         currentIndex = Math.min(currentIndex, Math.max(currentVocabList.length - 1, 0));
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 鍵盤快捷鍵
         document.addEventListener('keydown', handleKeyPress);
+        window.addEventListener('vocabDataChanged', updateVocabList);
 
         updateDeckFilterButtons();
     }
@@ -152,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (backWord) backWord.textContent = `No "${getDeckFilterLabel()}" words`;
             if (backPartOfSpeech) backPartOfSpeech.textContent = '-';
             if (backPronunciation) backPronunciation.textContent = '-';
-            if (backCantoneseMeaning) backCantoneseMeaning.textContent = "用上面嘅篩選按鈕，或者改變標記再繼續。」;
+            if (backCantoneseMeaning) backCantoneseMeaning.textContent = "用上面嘅篩選按鈕，或者改變標記再繼續。";
             if (backEnglishExample) backEnglishExample.textContent = "";
             if (backCantoneseExample) backCantoneseExample.textContent = "";
             if (reviewStatus) reviewStatus.textContent = `Current deck: ${getDeckFilterLabel()}`;

@@ -69,6 +69,9 @@ class VocabStorage {
         try {
             localStorage.setItem(this.storageKey, JSON.stringify(vocabList));
             this.nextId = this.getNextId();
+            if (window && typeof window.dispatchEvent === 'function') {
+                window.dispatchEvent(new Event('vocabDataChanged'));
+            }
             return true;
         } catch (error) {
             console.error('保存自定義詞彙失敗:', error);
@@ -271,6 +274,9 @@ class VocabStorage {
     clearCustomVocab() {
         localStorage.removeItem(this.storageKey);
         this.nextId = 1000;
+        if (window && typeof window.dispatchEvent === 'function') {
+            window.dispatchEvent(new Event('vocabDataChanged'));
+        }
         return true;
     }
     
@@ -392,23 +398,16 @@ window.updateCustomVocab = (id, vocab) => vocabStorage.updateVocab(id, vocab);
 // 刪除詞彙
 window.deleteCustomVocab = (id) => {
     const result = vocabStorage.deleteVocab(id);
-    if (result.success) {
-        currentVocabList = vocabStorage.getAllVocab();
-    }
     return result;
 };
 
 // 重置功能
 window.resetCustomVocab = () => {
-    vocabStorage.clearCustomVocab();
-    currentVocabList = vocabStorage.getAllVocab();
-    return true;
+    return vocabStorage.clearCustomVocab();
 };
 
 window.resetAllVocab = () => {
-    vocabStorage.resetToOriginal();
-    currentVocabList = vocabStorage.getAllVocab();
-    return true;
+    return vocabStorage.resetToOriginal();
 };
 
 // 複習狀態相關
