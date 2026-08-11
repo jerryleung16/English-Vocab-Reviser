@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": "2026-08-11T01:21:50.558Z",
+  "exportedAt": "2026-08-11T04:46:09.828Z",
   "customVocab": [
     {
       "id": 1000,
@@ -1655,5 +1655,49 @@
       "translation": "個時間表仲未拍板，仲有得改。"
     }
   ],
-  "reviewStates": {}
+  "reviewStates": {
+    "1000": "known",
+    "1001": "known",
+    "1002": "known",
+    "1003": "known",
+    "1004": "dontknow",
+    "1005": "known",
+    "1006": "dontknow",
+    "1007": "dontknow",
+    "1008": "known",
+    "1009": "known",
+    "1010": "dontknow",
+    "1011": "dontknow",
+    "1012": "known",
+    "1013": "known",
+    "1014": "known",
+    "1015": "dontknow",
+    "1016": "known",
+    "1017": "known",
+    "1018": "known",
+    "1019": "dontknow",
+    "1020": "dontknow",
+    "1021": "dontknow",
+    "1022": "dontknow",
+    "1023": "dontknow",
+    "1024": "dontknow",
+    "1025": "dontknow",
+    "1026": "dontknow",
+    "1027": "dontknow",
+    "1028": "dontknow",
+    "1029": "dontknow",
+    "1030": "dontknow",
+    "1031": "dontknow",
+    "1032": "dontknow",
+    "1033": "known",
+    "1034": "dontknow",
+    "1035": "dontknow",
+    "1036": "dontknow",
+    "1037": "dontknow",
+    "1038": "dontknow",
+    "1039": "known",
+    "1040": "known",
+    "1041": "dontknow",
+    "1042": "known"
+  }
 }
